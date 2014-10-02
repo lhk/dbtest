@@ -13,8 +13,8 @@ public partial class MainWindow: Gtk.Window
 	/// <summary>
 	/// All the current words
 	/// </summary>
-	List<Spanish_German> wordsList;
-	List<Spanish_German>.Enumerator wordsEnumerator;
+	List<Vocabs> wordsList;
+	List<Vocabs>.Enumerator wordsEnumerator;
 	float fraction=0;
 	int currentNumber=0;
 	int totalNumber=0;
@@ -50,7 +50,7 @@ public partial class MainWindow: Gtk.Window
 	/// </summary>
 	public double y = 0;
 
-	public MainWindow (List<Spanish_German> wordsList, int number): base (Gtk.WindowType.Toplevel)
+	public MainWindow (List<Vocabs> wordsList, int number): base (Gtk.WindowType.Toplevel)
 	{
 		Console.WriteLine ("mainwindow");
 		Build ();
@@ -63,7 +63,7 @@ public partial class MainWindow: Gtk.Window
 		wordsEnumerator =wordsList.GetEnumerator ();
 
 		if (wordsEnumerator.MoveNext ())
-			spanishLabel.Text = wordsEnumerator.Current.Spanish;
+			spanishLabel.Text = wordsEnumerator.Current.Question;
 
 		GLib.Timeout.Add (20, new GLib.TimeoutHandler(onTimer));
 	}
@@ -88,7 +88,7 @@ public partial class MainWindow: Gtk.Window
 			progressBar.Fraction = 1;
 
 		if (wordsEnumerator.MoveNext ()) {
-			spanishLabel.Text = wordsEnumerator.Current.Spanish;
+			spanishLabel.Text = wordsEnumerator.Current.Question;
 			return true;
 		} else {
 			return false;
@@ -109,7 +109,7 @@ public partial class MainWindow: Gtk.Window
 
 	protected void checkClicked (object sender, EventArgs e)
 	{
-		if (answerText.Text == wordsEnumerator.Current.German) {
+		if (answerText.Text == wordsEnumerator.Current.Answer) {
 			right ();
 			nextVocab ();
 		}

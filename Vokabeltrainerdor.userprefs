@@ -1,11 +1,12 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Vokabeltrainerdor/MainWindow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Vokabeltrainerdor/Output.cs">
     <Files>
-      <File FileName="Vokabeltrainerdor/Program.cs" Line="1" Column="1" />
-      <File FileName="Vokabeltrainerdor/Output.cs" Line="1" Column="1" />
+      <File FileName="Vokabeltrainerdor/Program.cs" Line="26" Column="4" />
       <File FileName="../DBTest/DBTest/databases/setup.sql" Line="1" Column="1" />
-      <File FileName="Vokabeltrainerdor/MainWindow.cs" Line="31" Column="20" />
+      <File FileName="Vokabeltrainerdor/MainWindow.cs" Line="144" Column="42" />
+      <File FileName="Untitled Sql Script.sql" Line="1" Column="21" />
+      <File FileName="Vokabeltrainerdor/Output.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

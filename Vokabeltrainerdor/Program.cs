@@ -15,13 +15,13 @@ namespace Vokabeltrainerdor
 		public static void Main (string[] args)
 		{
 
-			string connectionString = "Data Source=databases/languages.sqlite;";
+			string connectionString = "Data Source=databases/languages2.sqlite;";
 
 			SqliteConnection sqliteConn = new SqliteConnection (connectionString);
 			LanguageDB lang = new LanguageDB (sqliteConn);
-			Table<Spanish_German> wordsTable = lang.GetTable<Spanish_German> ();
-			foreach (Spanish_German word in wordsTable) {
-				Console.WriteLine (word.German);
+			Table<Vocabs> wordsTable = lang.GetTable<Vocabs> ();
+			foreach (Vocabs word in wordsTable) {
+				Console.WriteLine (word.Answer);
 			}
 
 			var query =
@@ -29,8 +29,8 @@ namespace Vokabeltrainerdor
 					select word;
 
 			int number = 0;
-			List<Spanish_German> wordsList = new List<Spanish_German> ();
-			foreach (Spanish_German word in query) {
+			List<Vocabs> wordsList = new List<Vocabs> ();
+			foreach (Vocabs word in query) {
 				number++;
 				wordsList.Add (word);
 			}
