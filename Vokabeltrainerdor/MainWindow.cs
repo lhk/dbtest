@@ -13,6 +13,7 @@ public partial class MainWindow: Gtk.Window
 	/// <summary>
 	/// All the current words
 	/// </summary>
+	List<Spanish_German> wordsList;
 	List<Spanish_German>.Enumerator wordsEnumerator;
 	float fraction=0;
 	int currentNumber=0;
@@ -58,6 +59,7 @@ public partial class MainWindow: Gtk.Window
 
 		fraction = 1 / number;
 		totalNumber = number;
+		this.wordsList = wordsList;
 		wordsEnumerator =wordsList.GetEnumerator ();
 
 		if (wordsEnumerator.MoveNext ())
@@ -72,11 +74,11 @@ public partial class MainWindow: Gtk.Window
 	}
 
 	private void wrong(){
-		backgroundColor.R = 1;
+		backgroundColor.R = 1.5;
 	}
 
 	private void right(){
-		backgroundColor.G = 1;
+		backgroundColor.G = 1.5;
 	}
 
 	private bool nextVocab(){
@@ -101,7 +103,8 @@ public partial class MainWindow: Gtk.Window
 
 	protected void skipClicked (object sender, EventArgs e)
 	{
-
+		wrong ();
+		nextVocab ();
 	}
 
 	protected void checkClicked (object sender, EventArgs e)
@@ -114,8 +117,14 @@ public partial class MainWindow: Gtk.Window
 			wrong ();
 	}
 
+	/// <summary>
+	/// Called every time, the drawing area is rendered
+	/// </summary>
+	/// <param name="o">O.</param>
+	/// <param name="args">Arguments.</param>
 	protected void drawingAreaExposed (object o, ExposeEventArgs args)
 	{
+		// fade the background color back to normal
 		if (backgroundColor.R > 0.2)
 			backgroundColor.R *= 0.97f;
 		if (backgroundColor.G > 0.2)
@@ -123,25 +132,34 @@ public partial class MainWindow: Gtk.Window
 		if (backgroundColor.B > 0.2)
 			backgroundColor.B *= 0.97f;
 
+		// get the drawing area's context and fill the background
+		// if an answer was wrong, the backgroundColor will be shifted towards red, or green respectively
 		DrawingArea area = (DrawingArea)o;
 		Cairo.Context cx = Gdk.CairoHelper.Create (area.GdkWindow);
-
 		cx.LineWidth = 9;
 		cx.SetSourceRGB (backgroundColor.R, backgroundColor.G, backgroundColor.B);
 		cx.Paint ();
 
+		// width and height of the drawing area
+		// TODO: Get the actual with and height
 		int width, height;
-		width = area.WidthRequest;
-		height = area.HeightRequest;
+		width = 100;
+		height = 100;
 
+		//-----------------------------------------------------
+		// now a lot of code for a little bit of animation
+
+		// bounce of the corners
 		if (x > width||x<0)
 			xSpeed *= -1;
 		if (y > height||y<0)
 			ySpeed *= -1;
 
+		// move the ?
 		x += xSpeed;
 		y += ySpeed;
 
+		// some random speed changes
 		Random rand = new Random ();
 		if (rand.NextDouble () > 0.8)
 			xSpeed *= 1.5;
@@ -163,15 +181,20 @@ public partial class MainWindow: Gtk.Window
 		if (Math.Abs (ySpeed) < 0.05)
 			ySpeed = 0.05;
 
+		// rotate the ? symbol
 		rotation += rotationSpeed;
 		if (rotation < 0)
 			rotation = 360;
 		if (rotation > 360)
 			rotation = 0;
 
+		// some random rotation changes
 		if (rand.NextDouble () > 0.98)
 			rotationSpeed *= -1;
 
+		//-----------------------------------------------
+
+		// draw the ?
 		cx.SelectFontFace ("Courier", FontSlant.Normal, FontWeight.Bold);
 		cx.SetFontSize (50);
 		cx.SetSourceRGB (1, 1, 1);
@@ -185,6 +208,7 @@ public partial class MainWindow: Gtk.Window
 		cx.Stroke ();
 		cx.Paint ();
 
+		cx.Dispose ();
 
 	}
 }
