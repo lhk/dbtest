@@ -12,6 +12,10 @@ namespace Vokabeltrainerdor
 	using Vokabeltrainerdor.DbLinq;
 	class MainClass
 	{
+		/// <summary>
+		/// The entry point of the program.
+		/// </summary>
+		/// <param name="args">The command-line arguments.</param>
 		public static void Main (string[] args)
 		{
 

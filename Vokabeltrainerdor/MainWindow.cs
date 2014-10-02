@@ -15,6 +15,7 @@ public partial class MainWindow: Gtk.Window
 	/// </summary>
 	List<Vocabs> wordsList;
 	List<Vocabs>.Enumerator wordsEnumerator;
+
 	float fraction=0;
 	int currentNumber=0;
 	int totalNumber=0;
@@ -60,7 +61,7 @@ public partial class MainWindow: Gtk.Window
 		fraction = 1 / number;
 		totalNumber = number;
 		this.wordsList = wordsList;
-		wordsEnumerator =wordsList.GetEnumerator ();
+		wordsEnumerator =this.wordsList.GetEnumerator ();
 
 		if (wordsEnumerator.MoveNext ())
 			spanishLabel.Text = wordsEnumerator.Current.Question;
@@ -68,21 +69,35 @@ public partial class MainWindow: Gtk.Window
 		GLib.Timeout.Add (20, new GLib.TimeoutHandler(onTimer));
 	}
 
+	/// <summary>
+	/// Refresh the drawing area
+	/// </summary>
+	/// <returns><c>true</c>, if timer was oned, <c>false</c> otherwise.</returns>
 	private bool onTimer(){
 		drawingArea.QueueDraw ();
 		return true;
 	}
 
+	/// <summary>
+	/// flash the background red
+	/// </summary>
 	private void wrong(){
 		backgroundColor.R = 1.5;
 	}
 
+	/// <summary>
+	/// flash the background green
+	/// </summary>
 	private void right(){
 		backgroundColor.G = 1.5;
 	}
 
+	/// <summary>
+	/// check the current vocab, then setup the next
+	/// </summary>
+	/// <returns><c>true</c>, if there are vocabs left <c>false</c> if the final question was answered</returns>
 	private bool nextVocab(){
-
+		answerText.Text = "";
 		progressBar.Fraction += fraction;
 		if(progressBar.Fraction>1)
 			progressBar.Fraction = 1;
@@ -101,12 +116,22 @@ public partial class MainWindow: Gtk.Window
 		a.RetVal = true;
 	}
 
+	/// <summary>
+	/// Skip the current question, it's automatically wrong
+	/// </summary>
+	/// <param name="sender">Sender.</param>
+	/// <param name="e">E.</param>
 	protected void skipClicked (object sender, EventArgs e)
 	{
 		wrong ();
 		nextVocab ();
 	}
 
+	/// <summary>
+	/// Check the current answer, wrong or false?
+	/// </summary>
+	/// <param name="sender">Sender.</param>
+	/// <param name="e">E.</param>
 	protected void checkClicked (object sender, EventArgs e)
 	{
 		if (answerText.Text == wordsEnumerator.Current.Answer) {
@@ -125,6 +150,7 @@ public partial class MainWindow: Gtk.Window
 	protected void drawingAreaExposed (object o, ExposeEventArgs args)
 	{
 		// fade the background color back to normal
+		// it might have been changed by right() or wrong()
 		if (backgroundColor.R > 0.2)
 			backgroundColor.R *= 0.97f;
 		if (backgroundColor.G > 0.2)
@@ -196,7 +222,7 @@ public partial class MainWindow: Gtk.Window
 
 		// draw the ?
 		cx.SelectFontFace ("Courier", FontSlant.Normal, FontWeight.Bold);
-		cx.SetFontSize (50);
+		cx.SetFontSize (70);
 		cx.SetSourceRGB (1, 1, 1);
 
 		TextExtents extents = cx.TextExtents ("?");
