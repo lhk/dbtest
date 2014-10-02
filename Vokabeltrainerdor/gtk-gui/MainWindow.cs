@@ -97,6 +97,7 @@ public partial class MainWindow
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.skipButton.Clicked += new global::System.EventHandler (this.skipClicked);
+		this.answerText.KeyReleaseEvent += new global::Gtk.KeyReleaseEventHandler (this.onKeyPressed);
 		this.checkButton.Clicked += new global::System.EventHandler (this.checkClicked);
 		this.drawingArea.ExposeEvent += new global::Gtk.ExposeEventHandler (this.drawingAreaExposed);
 	}

@@ -142,6 +142,17 @@ public partial class MainWindow: Gtk.Window
 			wrong ();
 	}
 
+	protected void onKeyPressed (object o, KeyReleaseEventArgs args)
+	{
+		if (args.Event.Key == Gdk.Key.Return) {
+			if (answerText.Text == wordsEnumerator.Current.Answer) {
+				right ();
+				nextVocab ();
+			} else
+				wrong ();
+		}
+	}
+
 	/// <summary>
 	/// Called every time, the drawing area is rendered
 	/// </summary>
