@@ -1,1 +1,2 @@
-just a test how to connect to the db with c#
+C# can connect to the DB.
+There is a tool called LINQ to SQL. The representations for tables are created automatically.
