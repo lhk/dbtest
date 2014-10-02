@@ -7,8 +7,9 @@ public partial class MainWindow
 	private global::Gtk.Button skipButton;
 	private global::Gtk.Entry answerText;
 	private global::Gtk.Label translationLabel;
-	private global::Gtk.Label spanish;
+	private global::Gtk.Label spanishLabel;
 	private global::Gtk.Button checkButton;
+	private global::Gtk.DrawingArea drawingArea;
 
 	protected virtual void Build ()
 	{
@@ -60,11 +61,11 @@ public partial class MainWindow
 		w4.X = 46;
 		w4.Y = 133;
 		// Container child fixedContainer.Gtk.Fixed+FixedChild
-		this.spanish = new global::Gtk.Label ();
-		this.spanish.Name = "spanish";
-		this.spanish.LabelProp = global::Mono.Unix.Catalog.GetString ("Spanish");
-		this.fixedContainer.Add (this.spanish);
-		global::Gtk.Fixed.FixedChild w5 = ((global::Gtk.Fixed.FixedChild)(this.fixedContainer [this.spanish]));
+		this.spanishLabel = new global::Gtk.Label ();
+		this.spanishLabel.Name = "spanishLabel";
+		this.spanishLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Spanish");
+		this.fixedContainer.Add (this.spanishLabel);
+		global::Gtk.Fixed.FixedChild w5 = ((global::Gtk.Fixed.FixedChild)(this.fixedContainer [this.spanishLabel]));
 		w5.X = 165;
 		w5.Y = 83;
 		// Container child fixedContainer.Gtk.Fixed+FixedChild
@@ -78,6 +79,15 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w6 = ((global::Gtk.Fixed.FixedChild)(this.fixedContainer [this.checkButton]));
 		w6.X = 174;
 		w6.Y = 170;
+		// Container child fixedContainer.Gtk.Fixed+FixedChild
+		this.drawingArea = new global::Gtk.DrawingArea ();
+		this.drawingArea.WidthRequest = 100;
+		this.drawingArea.HeightRequest = 100;
+		this.drawingArea.Name = "drawingArea";
+		this.fixedContainer.Add (this.drawingArea);
+		global::Gtk.Fixed.FixedChild w7 = ((global::Gtk.Fixed.FixedChild)(this.fixedContainer [this.drawingArea]));
+		w7.X = 29;
+		w7.Y = 16;
 		this.Add (this.fixedContainer);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
@@ -87,5 +97,7 @@ public partial class MainWindow
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.skipButton.Clicked += new global::System.EventHandler (this.skipClicked);
+		this.checkButton.Clicked += new global::System.EventHandler (this.checkClicked);
+		this.drawingArea.ExposeEvent += new global::Gtk.ExposeEventHandler (this.drawingAreaExposed);
 	}
 }

@@ -72,7 +72,7 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.Label" id="spanish">
+          <widget class="Gtk.Label" id="spanishLabel">
             <property name="MemberName" />
             <property name="LabelProp" translatable="yes">Spanish</property>
           </widget>
@@ -89,10 +89,23 @@
             <property name="Type">TextOnly</property>
             <property name="Label" translatable="yes">Check</property>
             <property name="UseUnderline">True</property>
+            <signal name="Clicked" handler="checkClicked" />
           </widget>
           <packing>
             <property name="X">174</property>
             <property name="Y">170</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.DrawingArea" id="drawingArea">
+            <property name="MemberName" />
+            <property name="WidthRequest">100</property>
+            <property name="HeightRequest">100</property>
+            <signal name="ExposeEvent" handler="drawingAreaExposed" />
+          </widget>
+          <packing>
+            <property name="X">29</property>
+            <property name="Y">16</property>
           </packing>
         </child>
       </widget>
