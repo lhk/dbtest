@@ -24,17 +24,11 @@ namespace Vokabeltrainerdor
 			SqliteConnection sqliteConn = new SqliteConnection (connectionString);
 			LanguageDB lang = new LanguageDB (sqliteConn);
 			Table<Vocabs> wordsTable = lang.GetTable<Vocabs> ();
-			foreach (Vocabs word in wordsTable) {
-				Console.WriteLine (word.Answer);
-			}
-
-			var query =
-				from word in wordsTable
-					select word;
 
 			int number = 0;
 			List<Vocabs> wordsList = new List<Vocabs> ();
-			foreach (Vocabs word in query) {
+			foreach (Vocabs word in wordsTable) {
+				Console.WriteLine (word.Lang);
 				number++;
 				wordsList.Add (word);
 			}
