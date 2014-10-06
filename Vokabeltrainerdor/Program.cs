@@ -19,15 +19,15 @@ namespace Vokabeltrainerdor
 		public static void Main (string[] args)
 		{
 
-			string connectionString = "Data Source=databases/languages2.sqlite;";
+			string connectionString = "Data Source=databases/languages.sqlite;";
 
 			SqliteConnection sqliteConn = new SqliteConnection (connectionString);
 			LanguageDB lang = new LanguageDB (sqliteConn);
-			Table<Vocabs> wordsTable = lang.GetTable<Vocabs> ();
+			Table<Vocab> wordsTable = lang.GetTable<Vocab> ();
 
 			int number = 0;
-			List<Vocabs> wordsList = new List<Vocabs> ();
-			foreach (Vocabs word in wordsTable) {
+			List<Vocab> wordsList = new List<Vocab> ();
+			foreach (Vocab word in wordsTable) {
 				Console.WriteLine (word.Lang);
 				number++;
 				wordsList.Add (word);

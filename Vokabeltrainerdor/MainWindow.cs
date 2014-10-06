@@ -13,8 +13,8 @@ public partial class MainWindow: Gtk.Window
 	/// <summary>
 	/// All the current words
 	/// </summary>
-	List<Vocabs> wordsList;
-	List<Vocabs>.Enumerator wordsEnumerator;
+	List<Vocab> wordsList;
+	List<Vocab>.Enumerator wordsEnumerator;
 
 	float fraction=0;
 	int currentNumber=0;
@@ -51,7 +51,7 @@ public partial class MainWindow: Gtk.Window
 	/// </summary>
 	public double y = 0;
 
-	public MainWindow (List<Vocabs> wordsList, int number): base (Gtk.WindowType.Toplevel)
+	public MainWindow (List<Vocab> wordsList, int number): base (Gtk.WindowType.Toplevel)
 	{
 		Console.WriteLine ("mainwindow");
 		Build ();
